@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faylicia's Birthday Invitation</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fde2e8;          /* light pink background */
+      --card: #f4a7b9;        /* darker pink card */
+      --accent: #c2185b;      /* deep rose */
+      --text: #4a0f2b;        /* dark rose text */
+      --muted: #7a294a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #fff1f5, var(--bg));
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 620px;
+      background: linear-gradient(180deg, #ffd1dc, var(--card));
+      border-radius: 24px;
+      padding: 40px 28px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sticker {
+    position: absolute;
+    font-size: 1.8rem;
+    opacity: 0.85;
+    pointer-events: none;
+    }
+
+
+    .sticker-1 { top: 14px; left: 18px; }
+    .sticker-2 { top: 18px; right: 18px; }
+    .sticker-3 { bottom: 16px; left: 18px; }
+    .sticker-4 { bottom: 16px; right: 18px; }
+
+    @media (max-width: 480px) {
+    .sticker { font-size: 1.5rem; }
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 2.6rem);
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    h2 {
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .details {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .details span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      background: rgba(255, 130, 199, 0.196); 
+      border-radius: 14px;
+      padding: 12px 16px;
+      min-width: 70px;
+    }
+
+    .time-box h3 {
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    .time-box p {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #ff8fab, var(--accent));
+      color: #020617;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212,175,55,0.4);
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 14px;
+      background: var(--accent);
+      top: -20px;
+      animation: fall 3.5s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="sticker sticker-1">🎀</div>
+    <div class="sticker sticker-2">💗</div>
+    <div class="sticker sticker-3">✨</div>
+    <div class="sticker sticker-4">🧸</div>
+
+    <div class="page active" id="page1">
+      <h2>You're Invited</h2>
+      <h1>kirana</h1>
+
+      <div class="details">
+        TO MY BIRTHDAY PARTYYYYY!!! WOOOOOOO<br />
+      </div>
+     <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3iBgrkexCzVuPy4O9vx7Mf?utm_source=generator" width="80%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+      <button onclick="goToPage(2)">Next → Event Details</button>
+    </div>
+
+
+
+    <div class="page" id="page2">
+      <h2>Event Details</h2>
+      <h1>Faylicia's Birthday Celebration</h1>
+
+      <div class="details">
+        <span>Dress Code:</span> White, Formal<br />
+        <span>Date:</span> 21st of February 2025<br />
+        <span>Time:</span> 12:00 PM<br />
+        <span>Venue:</span> <a href="https://maps.app.goo.gl/uiiyj4xXMr5se7AY8">Tom's by Tom Aikens</a><br />
+        (click for more info)
+      </div>
+
+      <div class="countdown" id="countdown">
+        <div class="time-box"><h3 id="days">0</h3><p>Days</p></div>
+        <div class="time-box"><h3 id="hours">0</h3><p>Hours</p></div>
+        <div class="time-box"><h3 id="minutes">0</h3><p>Minutes</p></div>
+        <div class="time-box"><h3 id="seconds">0</h3><p>Seconds</p></div>
+      </div>
+
+      <button onclick="goToPage(3)">Next → Choose Your Food</button>
+    </div>
+
+    <div class="page" id="page3">
+      <h2>Almost There</h2>
+      <h1>Food Preferences</h1>
+
+      <div class="details">
+        Wat fud u wan   <br />
+      </div>
+
+      <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfS7WcmKF3_yuWaFoj_0cZz4xo0vUm5S_vc7qVudrPQKbhDLw/viewform?usp=header', '_blank')">Open Food Selection Form 🍽️</button>
+    </div>
+
+
+
+  <script>
+    function goToPage(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + page).classList.add('active');
+    }
+
+    // COUNTDOWN TO 21 FEB 12:00 PM
+    const eventDate = new Date('Feb 21, 2026 12:00:00').getTime();
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) return;
+
+      document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+    }, 1000);
+
+    for (let i = 0; i < 40; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
+      confetti.style.opacity = Math.random();
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 4000);
+    }
+  </script>
+
+</body>
+</html>
