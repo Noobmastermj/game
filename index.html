@@ -1,252 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Faylicia's Birthday Invitation</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #fde2e8;          /* light pink background */
-      --card: #f4a7b9;        /* darker pink card */
-      --accent: #c2185b;      /* deep rose */
-      --text: #4a0f2b;        /* dark rose text */
-      --muted: #7a294a;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #fff1f5, var(--bg));
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 620px;
-      background: linear-gradient(180deg, #ffd1dc, var(--card));
-      border-radius: 24px;
-      padding: 40px 28px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sticker {
-    position: absolute;
-    font-size: 1.8rem;
-    opacity: 0.85;
-    pointer-events: none;
-    }
-
-
-    .sticker-1 { top: 14px; left: 18px; }
-    .sticker-2 { top: 18px; right: 18px; }
-    .sticker-3 { bottom: 16px; left: 18px; }
-    .sticker-4 { bottom: 16px; right: 18px; }
-
-    @media (max-width: 480px) {
-    .sticker { font-size: 1.5rem; }
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 6vw, 2.6rem);
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--accent);
-    }
-
-    h2 {
-      font-size: 1rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-
-    .details {
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 30px;
-    }
-
-    .details span {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-
-    .time-box {
-      background: rgba(255, 130, 199, 0.196); 
-      border-radius: 14px;
-      padding: 12px 16px;
-      min-width: 70px;
-    }
-
-    .time-box h3 {
-      font-size: 1.4rem;
-      color: var(--accent);
-    }
-
-    .time-box p {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--muted);
-    }
-
-    button {
-      width: 100%;
-      padding: 16px;
-      border-radius: 999px;
-      border: none;
-      background: linear-gradient(135deg, #ff8fab, var(--accent));
-      color: #020617;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(212,175,55,0.4);
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    .confetti {
-      position: absolute;
-      width: 8px;
-      height: 14px;
-      background: var(--accent);
-      top: -20px;
-      animation: fall 3.5s linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(360deg);
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Card Battler</title>
+<style>
+:root{--bg:#e8edf6;--sf:#fff;--tx:#1b2340;--mu:#5d6785;--bd:#c9d1e3;--hp:#d64545;--bl:#2f80ed;--en:#d9971a;--at:#e4572e;--df:#2f80ed;--ut:#2a9d6f;--ac:#5a3fe0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#181a2e;--sf:#23264a;--tx:#eceffd;--mu:#a3abd0;--bd:#3a3f70;--ac:#8b78ff}}
+:root[data-theme="dark"]{--bg:#181a2e;--sf:#23264a;--tx:#eceffd;--mu:#a3abd0;--bd:#3a3f70;--ac:#8b78ff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-user-select:none;user-select:none}
+#app{max-width:480px;margin:0 auto;height:100%;display:flex;flex-direction:column;gap:10px;padding:12px;box-sizing:border-box;overflow-y:auto}
+.panel{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:12px}
+.col{margin:auto;width:100%;text-align:center;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.name{font-weight:700;font-size:18px}
+.bar{height:12px;border-radius:6px;background:var(--bd);overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--hp);transition:width .4s}
+.tag{font-size:14px;color:var(--mu)}
+.intent{font-weight:600;color:var(--at);font-size:14px}
+.stats{display:flex;gap:14px;font-weight:600}
+.stats .bl{color:var(--bl)}.stats .en{color:var(--en)}
+#log{text-align:center;color:var(--mu);min-height:22px}
+.hand{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:auto}
+.card{font:inherit;color:var(--tx);background:var(--sf);border:1px solid var(--bd);border-top:6px solid var(--ut);border-radius:12px;padding:8px 6px;min-height:92px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;cursor:pointer}
+.card.a{border-top-color:var(--at)}.card.d{border-top-color:var(--df)}
+.card b{font-size:18px;color:var(--en)}
+.card span{font-weight:700}
+.card small{color:var(--mu);font-size:13px}
+.card:disabled{opacity:.4;cursor:default}
+.card:focus-visible,.btn:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.btn{font:inherit;font-weight:700;color:#fff;background:var(--ac);border:0;border-radius:12px;padding:14px;cursor:pointer}
+.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.over{position:fixed;inset:0;background:rgba(10,12,30,.7);display:flex;align-items:center;justify-content:center;padding:16px;z-index:5}
+.over .panel{max-width:440px;width:100%;display:flex;flex-direction:column;gap:10px;text-align:center}
+.over .hand{margin-top:0}
+/* battle stage and animation */
+.stage{display:flex;align-items:flex-end;gap:6px;padding:14px 8px 10px}
+.fx{flex:1;position:relative;text-align:center;border-radius:12px;padding:4px}
+.fx.act{background:color-mix(in srgb,var(--ac) 14%,transparent)}
+.vs{font-weight:800;color:var(--mu);align-self:center}
+.spr{display:inline-block}
+.big{display:inline-block;font-size:48px;line-height:1.1;animation:bob 2s ease-in-out infinite}
+.l .spr.lunge{animation:lungeR .45s}.r .spr.lunge{animation:lungeL .45s}
+.spr.hit{animation:shake .4s .15s}
+.float{position:absolute;top:0;left:50%;font-weight:800;font-size:22px;color:var(--hp);animation:up .9s .15s both;pointer-events:none}
+.float.ok{color:var(--ut)}
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes lungeR{40%{transform:translateX(60px) scale(1.15)}}
+@keyframes lungeL{40%{transform:translateX(-60px) scale(1.15)}}
+@keyframes shake{20%{transform:translateX(-8px);filter:brightness(2)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+@keyframes up{0%{opacity:0;transform:translate(-50%,10px)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-40px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+/* mini-game sheet */
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:5;max-width:480px;margin:0 auto;background:var(--sf);border-top:1px solid var(--bd);border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px;text-align:center;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+.sheet.go{background:var(--ac);color:#fff}.sheet.go .tag{color:#fff}
+.track{position:relative;height:26px;border-radius:13px;margin:8px 4px;background:linear-gradient(90deg,#d64545 0 20%,#e8923a 20% 34%,#3aa86f 34% 44%,#f2c230 44% 56%,#3aa86f 56% 66%,#e8923a 66% 80%,#d64545 80%)}
+#mk{position:absolute;left:0;top:-5px;width:6px;height:36px;border-radius:3px;background:var(--tx);border:2px solid var(--sf);transform:translateX(-50%)}
+.sheet .btn{padding:18px;font-size:20px}
+.fx .name{font-size:15px}
+.fx.dead{opacity:.45}
+body{touch-action:manipulation;-webkit-touch-callout:none}
+.arena{position:relative;height:150px;border-radius:12px;background:var(--bg);border:1px solid var(--bd);overflow:hidden}
+.tgt{position:absolute;width:58px;height:58px;border-radius:50%;border:0;font-size:30px;background:var(--at);display:none;padding:0}
+.btn .tag{color:inherit;opacity:.75;font-weight:400}
+#app{transition:transform .35s}
+.sheet.cd .btn{opacity:.35}
+.sheet.fake{background:var(--at);color:#fff}.sheet.fake .tag{color:#fff}
+.arena{height:170px}
+/* computer layout */
+.pc #app{max-width:1040px;padding:20px;gap:14px}
+.pc .stage{padding:22px 24px 16px}
+.pc .big{font-size:84px}
+.pc .fx .name{font-size:18px}
+.pc .vs{font-size:22px}
+.pc .hand{grid-template-columns:repeat(5,1fr);gap:12px}
+.pc .over .hand{grid-template-columns:repeat(3,1fr)}
+.pc .card{min-height:150px;font-size:18px;transition:transform .12s}
+.pc .card:not(:disabled):hover{transform:translateY(-6px);border-color:var(--ac)}
+.pc .card small{font-size:14px}
+.pc .btn{font-size:17px}
+.pc .col{max-width:520px}
+.pc .over .panel{max-width:760px}
+.pc .sheet{max-width:760px}
+.pc .arena{height:230px}
+.pc .card[data-k]{position:relative}
+.pc .card[data-k]::after{content:attr(data-k);position:absolute;top:6px;right:8px;font-size:12px;color:var(--mu);border:1px solid var(--bd);border-radius:4px;padding:0 5px}
+.pc .sheet .btn::after{content:" (Space)"}
+.pc [data-a="end"]::after{content:" (E)"}
+.pc [data-a="go"]::after{content:" (Space)"}
+.tgt{width:64px;height:64px}
+</style>
 </head>
 <body>
+<div id="app"></div>
+<script>
+// ---- Game data: add or edit cards, classes, enemies and difficulties here ----
+// c = energy cost, d = damage, x = hits, b = block, h = heal, dr = draw, k = class, m = attack mini-game
+// mini-games: time (stop the marker), hold (charge and release), mash (tap fast), target (tap targets)
+const CARDS = {
+  strike:      {n:"Strike",       c:1, d:6,         m:"time",   k:"knight", t:"Deal 6"},
+  bash:        {n:"Shield Bash",  c:2, d:11,        m:"mash",   k:"knight", t:"Deal 11"},
+  smite:       {n:"Smite",        c:3, d:19,        m:"hold",   k:"knight", t:"Deal 19"},
+  spark:       {n:"Spark",        c:1, d:3, x:3,    m:"target", k:"mage",   t:"Deal 3 three times"},
+  frost:       {n:"Frost Bolt",   c:2, d:10,        m:"time",   k:"mage",   t:"Deal 10"},
+  fireball:    {n:"Fireball",     c:3, d:22,        m:"hold",   k:"mage",   t:"Deal 22"},
+  stab:        {n:"Quick Stab",   c:1, d:5,         m:"mash",   k:"rogue",  t:"Deal 5"},
+  slash:       {n:"Double Slash", c:2, d:8, x:2,    m:"target", k:"rogue",  t:"Deal 8 twice"},
+  assassinate: {n:"Assassinate",  c:3, d:20,        m:"time",   k:"rogue",  t:"Deal 20"},
+  defend: {n:"Defend",    c:1, b:5,  t:"Gain 5 block"},
+  wall:   {n:"Iron Wall", c:2, b:12, t:"Gain 12 block"},
+  mend:   {n:"Mend",      c:1, h:5,  t:"Heal 5"},
+  focus:  {n:"Focus",     c:0, dr:2, t:"Draw 2 cards"}
+};
+const CLASSES = {
+  knight: {n:"Knight", e:"🛡️", hp:1.15, d:"Tough melee fighter",
+    deck:["strike","strike","strike","strike","bash","bash","defend","defend","defend","defend","mend","wall"]},
+  mage:   {n:"Mage",   e:"🧙", hp:.85,  d:"Fragile, big spells",
+    deck:["spark","spark","spark","spark","frost","frost","fireball","defend","defend","defend","mend","focus"]},
+  rogue:  {n:"Rogue",  e:"🥷", hp:1,    d:"Fast multi-hits",
+    deck:["stab","stab","stab","stab","slash","slash","defend","defend","defend","focus","focus","mend"]}
+};
+const MGN = {time:"timing", hold:"charge", mash:"mash", target:"aim"};
+// mv = moves in order: ["a", damage] attacks, ["b", amount] gains block
+const ENEMIES = [
+  {n:"Slime",  e:"🟢", hp:30, mv:[["a",6],["a",8],["b",6]]},
+  {n:"Goblin", e:"👺", hp:42, mv:[["a",9],["b",8],["a",12]]},
+  {n:"Dragon", e:"🐉", hp:66, mv:[["a",10],["a",16],["b",12]]}
+];
+// hp/dmg = enemy multipliers, p = starting HP, w = dodge window size, hide = enemy moves hidden
+const DIFF = {
+  easy:      {n:"Easy",      hp:.7,  dmg:.7,  p:50, w:1.3},
+  normal:    {n:"Normal",    hp:1,   dmg:1,   p:40, w:1},
+  hard:      {n:"Hard",      hp:1.4, dmg:1.3, p:35, w:.85},
+  nightmare: {n:"Nightmare", hp:1.6, dmg:1.5, p:30, w:.7, hide:1}
+};
 
-  <div class="container">
-    <div class="sticker sticker-1">🎀</div>
-    <div class="sticker sticker-2">💗</div>
-    <div class="sticker sticker-3">✨</div>
-    <div class="sticker sticker-4">🧸</div>
+let G = {}, M = {}, wins = 0, diff = "normal", dev = "";
+try { wins = +localStorage.getItem("cb_wins") || 0; dev = localStorage.getItem("cb_dev") || ""; } catch (e) {}
+document.body.classList.toggle("pc", dev === "pc");
+function setDev(v) { dev = v; try { localStorage.setItem("cb_dev", v); } catch (e) {} document.body.classList.toggle("pc", v === "pc"); }
 
-    <div class="page active" id="page1">
-      <h2>You're Invited</h2>
-      <h1>kirana</h1>
+const $ = s => document.querySelector(s);
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const alive = i => { for (let j = i; j < G.n; j++) if (G.p[j].hp > 0) return j; return -1; };
+const foe = () => G.pvp ? G.p[1 - G.t] : G.p[G.n];
 
-      <div class="details">
-        TO MY BIRTHDAY PARTYYYYY!!! WOOOOOOO<br />
-      </div>
-     <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3iBgrkexCzVuPy4O9vx7Mf?utm_source=generator" width="80%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+function mk(cls, i, P, cnt) {
+  const C = CLASSES[cls], hp = Math.round(P * C.hp);
+  return {cls, n: cnt > 1 ? "P" + (i + 1) + " " + C.n : C.n, e: C.e, hp, max: hp, block: 0,
+    deck: [...C.deck], dp: shuffle([...C.deck]), dc: [], hand: []};
+}
+function draw(f, n) {
+  while (n-- > 0) {
+    if (!f.dp.length) f.dp = shuffle(f.dc.splice(0));
+    if (!f.dp.length) break;
+    f.hand.push(f.dp.pop());
+  }
+}
+function beginTurn() { const f = G.p[G.t]; f.block = 0; G.energy = 3; draw(f, 5); }
 
-      <button onclick="goToPage(2)">Next → Event Details</button>
-    </div>
+function newGame() {
+  const pv = M.mode === "pvp", n = M.cls.length;
+  diff = M.d || "normal";
+  const P = pv ? 40 : DIFF[diff].p;
+  G = {pvp: pv, n, stage: 0, p: M.cls.map((k, i) => mk(k, i, P, n))};
+  if (pv) { G.t = 0; G.mode = "pass"; G.log = "P1 goes first."; } else startFight();
+}
+function startFight() {
+  const E = ENEMIES[G.stage], D = DIFF[diff], m = Math.round(E.hp * D.hp * (G.n > 1 ? 1.7 : 1));
+  G.p.length = G.n;
+  G.p.forEach(f => { f.dp = shuffle([...f.deck]); f.dc = []; f.hand = []; });
+  G.p[G.n] = {n: E.n, e: E.e, hp: m, max: m, block: 0, i: 0, hand: [],
+    mv: E.mv.map(([t, v]) => [t, t === "a" ? Math.round(v * D.dmg) : v])};
+  G.t = 0; G.log = "A wild " + E.n + " appears!";
+  G.mode = G.n > 1 ? "pass" : "play";
+  if (G.n === 1) beginTurn();
+}
 
+// ---- Playing cards ----
+function play(i) {
+  const f = G.p[G.t], id = f.hand[i], c = CARDS[id];
+  if (G.mode !== "play" || c.c > G.energy) return;
+  G.energy -= c.c; f.hand.splice(i, 1); f.dc.push(id);
+  if (c.b) f.block += c.b;
+  if (c.h) f.hp = Math.min(f.max, f.hp + c.h);
+  if (c.dr) draw(f, c.dr);
+  G.log = f.n + " played " + c.n + ".";
+  if (c.d) atkMini(f, foe(), c); else render();
+}
 
+// ---- Attack mini-games ----
+const RT = s => s >= 1 ? ["PERFECT!", 1.25] : s >= .7 ? ["Good hit.", 1] : s >= .35 ? ["Weak hit.", .5] : ["MISS!", 0];
+const sc = d => d < .06 ? 1 : d < .16 ? .7 : d < .3 ? .35 : 0;
+function atkMini(f, o, c) {
+  G.mode = "mini";
+  const m = G.mini = {k: c.m, f, o, c, p: 0, n: 0, N: 6 + 4 * c.c, hits: 0, r: 0, on: 0,
+    t0: performance.now(), off: Math.random() * 2, spd: c.c >= 2 ? 1.1 : .8};
+  render();
+  if (m.k === "mash") m.to = setTimeout(() => fin(RT(Math.min(1, m.n / m.N))), 2000);
+  else if (m.k === "target") m.to = setTimeout(nextTarget, 600);
+  else loop();
+}
+function fin(r) {
+  const m = G.mini; if (!m || m.done) return;
+  m.done = 1; clearTimeout(m.to);
+  strike(m.f, m.o, Math.round(m.c.d * (m.c.x || 1) * r[1]), r[0], () => { G.mode = "play"; });
+}
+function loop() {
+  const m = G.mini;
+  if (!m || m.done || (m.k !== "time" && m.k !== "hold")) return;
+  const t = (performance.now() - m.t0) / 1000;
+  if (m.k === "time") { const x = (t * m.spd + m.off) % 2; m.p = x < 1 ? x : 2 - x; }
+  else if (m.on) { m.p = Math.min(1, t / 1.5); if (m.p >= 1) return rel(); }
+  const el = $("#mk"); if (el) el.style.left = m.p * 100 + "%";
+  requestAnimationFrame(loop);
+}
+function rel() {
+  const m = G.mini;
+  if (!m || m.k !== "hold" || !m.on || m.done) return;
+  m.on = 0; fin(RT(sc(Math.abs(m.p - .5))));
+}
+function nextTarget() {
+  const m = G.mini; if (!m || m.done) return;
+  if (m.r >= 3) return fin(RT([0, .4, .7, 1][m.hits]));
+  m.r++; m.lock = 0;
+  const a = $("#ar"), b = $("#tg"), c = $("#cnt");
+  if (a && b) {
+    const S = 64;
+    b.textContent = "🎯";
+    b.style.left = Math.random() * (a.clientWidth - S) + "px";
+    b.style.top = Math.random() * (a.clientHeight - S) + "px";
+    b.style.display = "block";
+  }
+  if (c) c.textContent = m.r + " / 3";
+  m.to = setTimeout(nextTarget, 1100);
+}
+function hitT() {
+  const m = G.mini;
+  if (!m || m.k !== "target" || m.done || m.lock) return;
+  m.lock = 1; clearTimeout(m.to); m.hits++;
+  $("#tg").textContent = "💥";
+  m.to = setTimeout(nextTarget, 300);
+}
+function tap() {
+  const m = G.mini;
+  if (G.mode !== "mini" || !m || m.done) return;
+  if (m.k === "dg") return dodgeTap();
+  if (m.k === "time") fin(RT(sc(Math.abs(m.p - .5))));
+  else if (m.k === "mash") { m.n++; const c = $("#cnt"); if (c) c.textContent = m.n; }
+  else if (m.k === "hold" && !m.on) { m.on = 1; m.t0 = performance.now(); }
+}
 
-    <div class="page" id="page2">
-      <h2>Event Details</h2>
-      <h1>Faylicia's Birthday Celebration</h1>
-
-      <div class="details">
-        <span>Dress Code:</span> White, Formal<br />
-        <span>Date:</span> 21st of February 2025<br />
-        <span>Time:</span> 12:00 PM<br />
-        <span>Venue:</span> <a href="https://maps.app.goo.gl/uiiyj4xXMr5se7AY8">Tom's by Tom Aikens</a><br />
-        (click for more info)
-      </div>
-
-      <div class="countdown" id="countdown">
-        <div class="time-box"><h3 id="days">0</h3><p>Days</p></div>
-        <div class="time-box"><h3 id="hours">0</h3><p>Hours</p></div>
-        <div class="time-box"><h3 id="minutes">0</h3><p>Minutes</p></div>
-        <div class="time-box"><h3 id="seconds">0</h3><p>Seconds</p></div>
-      </div>
-
-      <button onclick="goToPage(3)">Next → Choose Your Food</button>
-    </div>
-
-    <div class="page" id="page3">
-      <h2>Almost There</h2>
-      <h1>Food Preferences</h1>
-
-      <div class="details">
-        Wat fud u wan   <br />
-      </div>
-
-      <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfS7WcmKF3_yuWaFoj_0cZz4xo0vUm5S_vc7qVudrPQKbhDLw/viewform?usp=header', '_blank')">Open Food Selection Form 🍽️</button>
-    </div>
-
-
-
-  <script>
-    function goToPage(page) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById('page' + page).classList.add('active');
+// ---- Dodge mini-game: tap only after the NOW signal ----
+function dodge(o, title, cb) {
+  const W = G.pvp ? 1 : DIFF[diff].w;
+  G.mode = "mini";
+  const m = G.mini = {k: "dg", o, title, cb, W, go: 0, done: 0, ph: "cd"};
+  render();
+  const sh = $("#sheet"); if (sh) sh.classList.add("cd");
+  let c = G.pvp ? 3 : 1;
+  const tick = () => {
+    if (m.done) return;
+    const el = $("#ds");
+    if (c > 0) { if (el) el.textContent = "Dodge starts in " + c; c--; m.t = setTimeout(tick, 1000); return; }
+    m.ph = "wait";
+    if (sh) sh.classList.remove("cd");
+    if (el) el.textContent = "Wait for the REAL signal. Fakes will try to trick you!";
+    const delay = 800 + Math.random() * 2000;
+    if (delay > 1500 && Math.random() < .6) {
+      m.t3 = setTimeout(() => {
+        const d = $("#dt");
+        if (d && !m.go) { d.textContent = "😈 Fake!"; sh.classList.add("fake"); setTimeout(() => { if (!m.go) { d.textContent = m.title; sh.classList.remove("fake"); } }, 500); }
+      }, delay * .35);
     }
+    m.t = setTimeout(() => {
+      m.go = 1; m.t0 = performance.now();
+      if (sh) sh.classList.add("go");
+      const d = $("#dt"); if (d) d.textContent = "❗ NOW!";
+      m.t2 = setTimeout(() => dg(1, "Too slow!"), 650 * W);
+    }, delay);
+  };
+  tick();
+}
+function dg(mult, txt) {
+  const m = G.mini; if (m.done) return;
+  m.done = 1; clearTimeout(m.t); clearTimeout(m.t2); clearTimeout(m.t3); m.cb(mult, txt);
+}
+function dodgeTap() {
+  const m = G.mini;
+  if (m.ph === "cd") return;
+  if (!m.go) return dg(1, "Too early!");
+  const rt = performance.now() - m.t0;
+  rt <= 340 * m.W ? dg(0, "Dodged!") : rt <= 650 * m.W ? dg(.5, "Partial dodge.") : dg(1, "Too slow!");
+}
 
-    // COUNTDOWN TO 21 FEB 12:00 PM
-    const eventDate = new Date('Feb 21, 2026 12:00:00').getTime();
+// ---- Resolving damage ----
+function strike(f, o, base, tag, done) {
+  if (base > 0 && G.p.indexOf(o) < G.n) {
+    return dodge(o, o.n + ": get ready to dodge!", (mult, txt) => hit(f, o, Math.round(base * mult), tag + " " + txt, done, txt));
+  }
+  hit(f, o, base, tag, done, "Miss");
+}
+function hit(f, o, dmg, msg, done, zeroTxt) {
+  const ab = Math.min(o.block, dmg), tot = dmg;
+  o.block -= ab; dmg -= ab; o.hp -= dmg;
+  G.anim = {a: G.p.indexOf(f), h: G.p.indexOf(o)};
+  G.fx = {i: G.p.indexOf(o), t: tot === 0 ? zeroTxt : dmg > 0 ? "-" + dmg : "Blocked"};
+  G.log = msg + (tot ? " " + tot + " damage" : "") + (ab ? " (" + ab + " blocked)." : ".");
+  if (o.hp <= 0) {
+    o.hp = 0;
+    if (G.pvp) finish(f.n + " wins!");
+    else if (o === G.p[G.n]) win();
+    else if (G.p.slice(0, G.n).every(x => x.hp <= 0)) finish("Your team was defeated.");
+  }
+  if (G.mode !== "end" && G.mode !== "reward") done();
+  render();
+}
+function finish(msg) { G.mode = "end"; G.msg = msg; }
+function opts() {
+  const f = G.p[G.rw];
+  return shuffle(Object.keys(CARDS).filter(k => k !== "defend" && (!CARDS[k].k || CARDS[k].k === f.cls))).slice(0, 3);
+}
+function win() {
+  if (G.stage === ENEMIES.length - 1) {
+    finish(G.n > 1 ? "You won the run together!" : "You won the run!"); wins++;
+    try { localStorage.setItem("cb_wins", wins); } catch (e) {}
+    return;
+  }
+  G.p.slice(0, G.n).forEach(f => { f.hp = f.hp > 0 ? Math.min(f.max, f.hp + 8) : 10; });
+  G.mode = "reward"; G.rw = 0; G.opts = opts();
+}
+function endTurn() {
+  if (G.mode !== "play") return;
+  const f = G.p[G.t];
+  f.dc.push(...f.hand); f.hand = [];
+  if (G.pvp) { G.log = f.n + " ended the turn."; G.t = 1 - G.t; G.mode = "pass"; return render(); }
+  const nx = alive(G.t + 1);
+  if (nx >= 0) { G.log = f.n + " ended the turn."; G.t = nx; G.mode = "pass"; return render(); }
+  const e = G.p[G.n]; e.block = 0;
+  const [t, v] = e.mv[e.i % e.mv.length]; e.i++;
+  const next = () => { G.t = alive(0); G.mode = G.n > 1 ? "pass" : "play"; if (G.n === 1) beginTurn(); };
+  if (t === "a") {
+    const L = G.p.slice(0, G.n).filter(x => x.hp > 0), tg = L[Math.floor(Math.random() * L.length)];
+    strike(e, tg, v, e.n + " attacks" + (G.n > 1 ? " " + tg.n : "") + "!", next);
+  } else { e.block += v; G.log = e.n + " gains " + v + " block."; next(); render(); }
+}
+function pick(id) {
+  if (id) G.p[G.rw].deck.push(id);
+  if (++G.rw < G.n) G.opts = opts(); else { G.stage++; startFight(); }
+  render();
+}
 
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      if (distance < 0) return;
-
-      document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-      document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
-    }, 1000);
-
-    for (let i = 0; i < 40; i++) {
-      const confetti = document.createElement('div');
-      confetti.classList.add('confetti');
-      confetti.style.left = Math.random() * 100 + 'vw';
-      confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
-      confetti.style.opacity = Math.random();
-      document.body.appendChild(confetti);
-
-      setTimeout(() => confetti.remove(), 4000);
-    }
-  </script>
-
+// ---- Drawing the screen ----
+function cardHTML(id, attrs) {
+  const c = CARDS[id], k = c.d ? "a" : c.b ? "d" : "u";
+  return `<button class="card ${k}" ${attrs}><b>${c.c}</b><span>${c.n}</span><small>${c.t}${c.m ? " · " + MGN[c.m] : ""}</small></button>`;
+}
+function menuHTML() {
+  const btn = (a, v, t, s) => `<button class="btn alt" data-a="${a}" data-v="${v}">${t}${s ? `<br><span class="tag">${s}</span>` : ""}</button>`;
+  if (!dev) return `<div class="panel col"><div class="name">Card Battler</div><div class="tag">Which device are you on?</div>${btn("dev", "phone", "📱 Phone or tablet", "Touch controls")}${btn("dev", "pc", "💻 Computer", "Mouse and keyboard")}</div>`;
+  let h = `<div class="panel col"><div class="name">Card Battler</div>`;
+  if (!M.mode) { const two = dev === "pc" ? "2 players, same screen, taking turns" : "2 players, opposite sides of the phone"; h += btn("mode", "pve", "Vs computer", "1 player") + btn("mode", "coop", "Co-op vs computer", two) + btn("mode", "pvp", "Versus", two); }
+  else if (M.mode !== "pvp" && !M.d) h += `<div class="tag">Choose a difficulty</div>` + Object.keys(DIFF).map(k => btn("d", k, DIFF[k].n, k === "nightmare" ? "enemy moves hidden" : "")).join("");
+  else h += `<div class="tag">${M.mode === "pve" ? "Choose your class" : "Player " + (M.cls.length + 1) + ", choose your class"}</div>` +
+    Object.keys(CLASSES).map(k => { const C = CLASSES[k];
+      return btn("cls", k, C.e + " " + C.n, C.d + ". " + Object.values(CARDS).filter(c => c.k === k).map(c => c.n + " (" + MGN[c.m] + ")").join(", ")); }).join("");
+  h += M.mode ? btn("new", "", "Back") : btn("dev", "", "Change device");
+  return h + `<div class="tag">Runs won: ${wins}</div></div>`;
+}
+function sheetHTML() {
+  const m = G.mini, S = (t, s, body, b) => `<div class="sheet" id="sheet"><div class="name" id="dt">${t}</div><div class="tag" id="ds">${s}</div>${body}${b ? `<button class="btn" data-a="tap">${b}</button>` : ""}</div>`;
+  const tr = `<div class="track"><i id="mk"></i></div>`;
+  if (m.k === "time") return S("Time your attack!", "Tap when the marker is in the gold zone", tr, "TAP!");
+  if (m.k === "hold") return S("Charge your attack!", "Hold the button, release in the gold zone", tr, "HOLD");
+  if (m.k === "mash") return S("Mash!", `Tap fast: <b id="cnt">0</b> / ${m.N}`, "", "MASH!");
+  if (m.k === "target") return S("Hit the targets!", `Tap each target before it vanishes: <b id="cnt">0 / 3</b>`, `<div class="arena" id="ar"><button class="tgt" id="tg" data-a="tgt">🎯</button></div>`);
+  return S(m.title, "Get ready...", "", "DODGE");
+}
+// who the screen should face: the player who must act right now
+function faceIdx() {
+  if (!G.p || G.n < 2) return 0;
+  const m = G.mini;
+  if (G.mode === "mini" && m) return G.p.indexOf(m.k === "dg" ? m.o : m.f);
+  if (G.mode === "reward") return G.rw;
+  return G.t;
+}
+function render() {
+  const app = $("#app");
+  const flip = dev === "phone" && (G.p ? faceIdx() === 1 : M.mode && M.mode !== "pve" && M.cls && M.cls.length === 1);
+  app.style.transform = flip ? "rotate(180deg)" : "";
+  if (!G.p) { app.innerHTML = menuHTML(); return; }
+  const f = G.p[G.t];
+  if (G.mode === "pass") {
+    app.innerHTML = `<div class="panel col"><div class="name">${f.n}, your turn</div>
+    <div class="tag">${G.p.slice(0, G.pvp ? 2 : G.n).map(x => x.n + ": " + x.hp + " HP").join(", ")}</div>
+    <div class="tag">${G.log}</div><button class="btn" data-a="go">Start turn</button></div>`;
+    return;
+  }
+  const A = G.anim || {}, X = G.fx, RI = G.pvp ? 1 : G.n;
+  let intent = "";
+  if (!G.pvp) {
+    const e = G.p[G.n], [t, v] = e.mv[e.i % e.mv.length];
+    intent = DIFF[diff].hide ? "Next: ???" : t === "a" ? "Next: attacks for " + v : "Next: gains " + v + " block";
+  }
+  const fighter = i => {
+    const x = G.p[i];
+    return `<div class="fx ${i === RI ? "r" : "l"} ${G.t === i && G.mode !== "end" ? "act" : ""} ${x.hp <= 0 ? "dead" : ""}">
+      ${X && X.i === i ? `<span class="float ${/^-/.test(X.t) ? "" : "ok"}">${X.t}</span>` : ""}
+      <div class="spr ${A.a === i ? "lunge" : ""} ${A.h === i ? "hit" : ""}"><span class="big">${x.hp <= 0 ? "💀" : x.e}</span></div>
+      <div class="name">${x.n}</div>
+      <div class="bar"><i style="width:${x.hp / x.max * 100}%"></i></div>
+      <div class="tag">${x.hp} / ${x.max} HP${x.block ? " · " + x.block + " block" : ""}</div>
+      ${i === RI && !G.pvp ? `<div class="intent">${intent}</div>` : ""}</div>`;
+  };
+  const left = G.pvp ? [0] : [...Array(G.n).keys()];
+  const label = G.pvp ? f.n + "’s turn" : (G.n > 1 ? f.n + "’s turn · " : "") + DIFF[diff].n + " · Fight " + (G.stage + 1) + " of " + ENEMIES.length;
+  let h = `
+  <div class="panel stage">${left.map(fighter).join("")}<div class="vs">VS</div>${fighter(RI)}</div>
+  <div id="log">${G.log}</div>
+  <div class="row"><div class="stats"><span class="bl">Block ${f.block}</span><span class="en">Energy ${G.energy}</span></div><span class="tag">${label}</span></div>
+  <div class="hand">${f.hand.map((id, i) => cardHTML(id, `data-a="play" data-v="${i}" data-k="${i + 1}"` + (CARDS[id].c > G.energy ? " disabled" : ""))).join("")}</div>
+  <button class="btn" data-a="end">End turn</button>`;
+  if (G.mode === "mini") h += sheetHTML();
+  if (G.mode === "reward") {
+    h += `<div class="over"><div class="panel"><div class="name">${G.p[G.n].n} defeated!</div>
+    <div class="tag">${G.p[G.rw].n}: choose a card to add to your deck</div>
+    <div class="hand">${G.opts.map((id, i) => cardHTML(id, `data-a="pick" data-v="${id}" data-k="${i + 1}"`)).join("")}</div>
+    <button class="btn alt" data-a="pick" data-v="">Skip</button></div></div>`;
+  } else if (G.mode === "end") {
+    h += `<div class="over"><div class="panel"><div class="name">${G.msg}</div>
+    <div class="tag">Runs won: ${wins}</div><button class="btn" data-a="new">Back to menu</button></div></div>`;
+  }
+  app.innerHTML = h;
+  G.anim = null; G.fx = null;
+}
+// mini-games use pointer events so taps react instantly
+$("#app").addEventListener("pointerdown", ev => {
+  if (ev.target.closest('[data-a="tap"]')) { ev.preventDefault(); tap(); }
+  else if (ev.target.closest('[data-a="tgt"]')) { ev.preventDefault(); hitT(); }
+});
+document.addEventListener("pointerup", rel);
+document.addEventListener("pointercancel", rel);
+document.addEventListener("contextmenu", e => e.preventDefault());
+// keyboard controls (computer version)
+document.addEventListener("keydown", ev => {
+  if (dev !== "pc" || !G.p || ev.ctrlKey || ev.metaKey || ev.altKey) return;
+  const k = ev.key, sp = k === " " || k === "Spacebar";
+  if (G.mode === "mini") { if (sp) { ev.preventDefault(); if (!ev.repeat) tap(); } }
+  else if (G.mode === "play") {
+    if (/^[1-9]$/.test(k) && G.p[G.t].hand[+k - 1]) play(+k - 1);
+    else if (k === "e" || k === "E" || k === "Enter") { ev.preventDefault(); endTurn(); }
+  } else if (G.mode === "pass") {
+    if (sp || k === "Enter") { ev.preventDefault(); G.mode = "play"; beginTurn(); render(); }
+  } else if (G.mode === "reward") {
+    if (/^[1-3]$/.test(k) && G.opts[+k - 1]) pick(G.opts[+k - 1]); else if (k === "s" || k === "S") pick("");
+  }
+});
+document.addEventListener("keyup", ev => { if (dev === "pc" && ev.key === " ") { ev.preventDefault(); rel(); } });
+$("#app").addEventListener("click", ev => {
+  const b = ev.target.closest("[data-a]"); if (!b) return;
+  const a = b.dataset.a, v = b.dataset.v;
+  if (a === "play") play(+v);
+  else if (a === "end") endTurn();
+  else if (a === "pick") pick(v);
+  else if (a === "go") { G.mode = "play"; beginTurn(); render(); }
+  else if (a === "dev") { setDev(v); render(); }
+  else if (a === "mode") { M = {mode: v, cls: []}; render(); }
+  else if (a === "d") { M.d = v; render(); }
+  else if (a === "cls") { M.cls.push(v); if (M.cls.length >= (M.mode === "pve" ? 1 : 2)) newGame(); render(); }
+  else if (a === "new") { G = {}; M = {}; render(); }
+});
+render();
+</script>
 </body>
 </html>
