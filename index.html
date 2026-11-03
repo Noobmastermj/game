@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Card Battler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap">
 <style>
 :root{--bg:#e8edf6;--sf:#fff;--tx:#1b2340;--mu:#5d6785;--bd:#c9d1e3;--hp:#d64545;--bl:#2f80ed;--en:#d9971a;--at:#e4572e;--df:#2f80ed;--ut:#2a9d6f;--ac:#5a3fe0;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -92,6 +94,59 @@ body{touch-action:manipulation;-webkit-touch-callout:none}
 .pc [data-a="end"]::after{content:" (E)"}
 .pc [data-a="go"]::after{content:" (Space)"}
 .tgt{width:64px;height:64px}
+/* visual polish */
+:root{--fd:"Lilita One","Trebuchet MS","Segoe UI",system-ui,sans-serif;--glow:#7a63ff;--sky:#d6e4ff;--sh:0 6px 20px rgba(30,40,90,.12)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#34407a;--sh:0 6px 20px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--sky:#34407a;--sh:0 6px 20px rgba(0,0,0,.35)}
+body{background:radial-gradient(900px 480px at 50% -80px,color-mix(in srgb,var(--glow) 22%,transparent),transparent),var(--bg)}
+#app{gap:12px;padding:14px}
+.panel{border-radius:18px;box-shadow:var(--sh)}
+.name,.card span,.float,.vs{font-family:var(--fd);font-weight:400;letter-spacing:.02em}
+.name{font-size:19px}
+.col{padding:22px;gap:12px}.col .name{font-size:34px}
+.stage{background:radial-gradient(120% 100% at 50% 0%,var(--sky),transparent 75%),var(--sf);border-radius:20px}
+.fx{border-radius:14px;padding:6px 4px;transition:background .3s,box-shadow .3s}
+.fx.act{box-shadow:0 0 0 2px color-mix(in srgb,var(--ac) 55%,transparent)}
+.fx.dead{filter:grayscale(1)}
+.spr{position:relative;padding-bottom:8px}
+.spr::after{content:"";position:absolute;left:50%;bottom:0;width:64%;height:12px;border-radius:50%;background:rgba(0,0,0,.2);transform:translateX(-50%);filter:blur(3px)}
+.vs{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--tx);color:var(--sf);font-size:14px}
+.bar{height:14px;border-radius:7px;background:color-mix(in srgb,var(--tx) 13%,transparent);box-shadow:inset 0 1px 3px rgba(0,0,0,.25)}
+.bar i{border-radius:7px;background:linear-gradient(90deg,#e0524f,#f28b5c)}
+.fx.l .bar i{background:linear-gradient(90deg,#2fa36b,#72d6a0)}
+.fx .tag{font-size:13px}
+.intent{display:inline-block;margin-top:4px;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--at) 16%,transparent)}
+#log{padding:9px 14px;border-radius:14px;background:color-mix(in srgb,var(--tx) 7%,transparent);color:var(--tx);font-size:15px}
+.stats span{padding:5px 13px;border-radius:999px;background:color-mix(in srgb,currentColor 14%,transparent)}
+.stats .bl::before{content:"🛡️ "}.stats .en::before{content:"⚡ "}
+.hand{gap:10px}
+.card,.card.a,.card.d{--cc:var(--ut);position:relative;justify-content:center;gap:5px;padding:18px 8px 10px;border:1px solid color-mix(in srgb,var(--cc) 45%,var(--bd));border-radius:14px;background:linear-gradient(180deg,color-mix(in srgb,var(--cc) 20%,var(--sf)),var(--sf) 60%);box-shadow:0 4px 12px rgba(0,0,0,.12);transition:transform .12s}
+.card.a{--cc:var(--at)}.card.d{--cc:var(--df)}
+.card b{position:absolute;top:-9px;left:-9px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--en);color:#fff;font:400 16px var(--fd);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.card span{font-size:16px}
+.card span::before{content:"✨";display:block;font-size:24px;margin-bottom:2px}
+.card.a span::before{content:"⚔️"}.card.d span::before{content:"🛡️"}
+.card small{line-height:1.25}
+.card:not(:disabled):active{transform:scale(.96)}
+.card:disabled{filter:grayscale(.7)}
+.btn{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 80%,#fff),var(--ac));border-radius:14px;box-shadow:0 4px 0 color-mix(in srgb,var(--ac) 60%,#000),0 8px 16px rgba(0,0,0,.15);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 color-mix(in srgb,var(--ac) 60%,#000)}
+.btn.alt{background:var(--sf);box-shadow:0 3px 0 var(--bd)}
+.btn .tag{display:block;margin-top:2px;font-size:13px}
+.over{backdrop-filter:blur(5px)}
+.sheet{border-radius:22px 22px 0 0;padding-top:22px}
+.sheet::before{content:"";width:44px;height:5px;border-radius:3px;background:var(--bd);margin:-12px auto 0}
+.sheet.go::before,.sheet.fake::before{background:rgba(255,255,255,.5)}
+.track{box-shadow:inset 0 2px 5px rgba(0,0,0,.3)}
+.arena{background:repeating-linear-gradient(45deg,transparent 0 14px,color-mix(in srgb,var(--tx) 5%,transparent) 14px 28px),var(--bg)}
+.tgt{background:radial-gradient(circle at 35% 30%,#ff9a76,var(--at));box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.ico{width:36px;height:36px;border-radius:50%;border:1px solid var(--bd);background:var(--sf);font-size:16px;cursor:pointer;padding:0;flex:none}
+.col .ico{margin:0 auto}
+.hand.deal .card{animation:deal .4s backwards}
+.hand.deal .card:nth-child(2){animation-delay:.06s}.hand.deal .card:nth-child(3){animation-delay:.12s}.hand.deal .card:nth-child(4){animation-delay:.18s}.hand.deal .card:nth-child(5){animation-delay:.24s}
+@keyframes deal{from{opacity:0;transform:translateY(40px) rotate(-6deg) scale(.9)}}
+.quake{animation:quake .4s .1s}
+@keyframes quake{25%{transform:translate(-5px,3px)}50%{transform:translate(5px,-3px)}75%{transform:translate(-3px,2px)}}
 </style>
 </head>
 <body>
@@ -115,6 +170,11 @@ const CARDS = {
   mend:   {n:"Mend",      c:1, h:5,  t:"Heal 5"},
   focus:  {n:"Focus",     c:0, dr:2, t:"Draw 2 cards"}
 };
+Object.assign(CARDS, {
+  rally:  {n:"Rally",        c:1, s:2,       k:"knight", t:"Gain 2 Strength"},
+  venom:  {n:"Venom Stab",   c:1, d:3, p:3,  m:"mash",   k:"rogue",  t:"Deal 3, poison 3"},
+  plague: {n:"Plague Cloud", c:2, p:5,       k:"mage",   t:"Poison 5"}
+});
 const CLASSES = {
   knight: {n:"Knight", e:"🛡️", hp:1.15, d:"Tough melee fighter",
     deck:["strike","strike","strike","strike","bash","bash","defend","defend","defend","defend","mend","wall"]},
@@ -138,11 +198,61 @@ const DIFF = {
   nightmare: {n:"Nightmare", hp:1.6, dmg:1.5, p:30, w:.7, hide:1}
 };
 
-let G = {}, M = {}, wins = 0, diff = "normal", dev = "";
-try { wins = +localStorage.getItem("cb_wins") || 0; dev = localStorage.getItem("cb_dev") || ""; } catch (e) {}
+// big cards (cost 4 or 5) and energy recovery; unspent energy carries over to the next turn
+Object.assign(CARDS, {
+  slam:     {n:"Titan Slam",   c:4, d:30,       m:"mash",   k:"knight", t:"Deal 30"},
+  meteor:   {n:"Meteor",       c:5, d:45,       m:"hold",   k:"mage",   t:"Deal 45"},
+  flurry:   {n:"Fatal Flurry", c:4, d:10, x:4,  m:"target", k:"rogue",  t:"Deal 10 four times"},
+  recharge: {n:"Recharge",     c:1, e:3,                              t:"Gain 3 energy"}
+});
+CLASSES.knight.deck.push("slam", "recharge");
+CLASSES.mage.deck.push("meteor", "recharge");
+CLASSES.rogue.deck.push("flurry", "recharge");
+ENEMIES.splice(2, 0, {n:"Ogre", e:"👹", hp:54, mv:[["b",10],["a",14],["a",11]]});
+let G = {}, M = {}, wins = 0, diff = "normal", dev = "", mute = false, AC;
+try { wins = +localStorage.getItem("cb_wins") || 0; dev = localStorage.getItem("cb_dev") || ""; mute = localStorage.getItem("cb_mute") === "1"; if (localStorage.getItem("cb_tut") !== "1") M.help = true; } catch (e) {}
 document.body.classList.toggle("pc", dev === "pc");
 function setDev(v) { dev = v; try { localStorage.setItem("cb_dev", v); } catch (e) {} document.body.classList.toggle("pc", v === "pc"); }
 
+// ---- Sound (synthesized, no files) and vibration ----
+function tone(f, d, ty, v, to, w) {
+  const a = AC, t = a.currentTime + (w || 0), o = a.createOscillator(), g = a.createGain();
+  o.type = ty; o.frequency.setValueAtTime(f, t);
+  if (to) o.frequency.exponentialRampToValueAtTime(to, t + d);
+  g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t + d);
+  o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + d);
+}
+function noise(d, v) {
+  const a = AC, n = Math.floor(a.sampleRate * d), b = a.createBuffer(1, n, a.sampleRate), x = b.getChannelData(0);
+  for (let i = 0; i < n; i++) x[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const s = a.createBufferSource(), g = a.createGain();
+  s.buffer = b; g.gain.value = v; s.connect(g); g.connect(a.destination); s.start();
+}
+const SFX = {
+  card: () => tone(520, .08, "triangle", .1, 780),
+  click: () => tone(700, .03, "square", .04),
+  tick: () => tone(440, .08, "sine", .1),
+  hit: () => { noise(.18, .25); tone(160, .2, "sawtooth", .12, 50); },
+  big: () => SFX.hit(),
+  block: () => tone(300, .12, "square", .08, 200),
+  whoosh: () => { noise(.25, .1); tone(900, .25, "sine", .05, 200); },
+  perfect: () => [660, 880, 1100].forEach((f, i) => tone(f, .14, "triangle", .1, 0, i * .07)),
+  ok: () => tone(600, .1, "triangle", .1, 800),
+  miss: () => tone(300, .25, "sawtooth", .08, 90),
+  win: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, .2, "triangle", .12, 0, i * .12)),
+  lose: () => [400, 330, 262, 196].forEach((f, i) => tone(f, .25, "sawtooth", .1, 0, i * .18))
+};
+const VIB = {hit: 40, big: 90, perfect: [20, 30, 20], miss: 60, whoosh: 15};
+function sfx(n) {
+  try {
+    if (dev !== "pc" && VIB[n] && navigator.vibrate) navigator.vibrate(VIB[n]);
+    if (mute) return;
+    if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === "suspended") AC.resume();
+    if (SFX[n]) SFX[n]();
+  } catch (e) {}
+}
+const muteBtn = () => `<button class="ico" data-a="mute" aria-label="Toggle sound">${mute ? "🔇" : "🔊"}</button>`;
 const $ = s => document.querySelector(s);
 const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const alive = i => { for (let j = i; j < G.n; j++) if (G.p[j].hp > 0) return j; return -1; };
@@ -160,7 +270,27 @@ function draw(f, n) {
     f.hand.push(f.dp.pop());
   }
 }
-function beginTurn() { const f = G.p[G.t]; f.block = 0; G.energy = 3; draw(f, 5); }
+function beginTurn() {
+  const f = G.p[G.t];
+  if (G.pvp && poisonTick(f)) return;
+  f.block = 0; G.energy = Math.min(10, (f.bank || 0) + 3); draw(f, 5); G.deal = 1;
+}
+// poison hurts at the start of the holder's turn and wears off by 1
+function poisonTick(f) {
+  if (!f.poison) return false;
+  f.hp -= f.poison; G.fx = {i: G.p.indexOf(f), t: "-" + f.poison + "☠"};
+  G.log = f.n + " takes " + f.poison + " poison damage."; f.poison--; sfx("hit");
+  if (f.hp > 0) return false;
+  f.hp = 0;
+  if (G.pvp) finish(G.p[1 - G.p.indexOf(f)].n + " wins!"); else win();
+  return true;
+}
+// the enemy picks its next target in advance so co-op players can see it
+function aim() {
+  const L = [];
+  for (let i = 0; i < G.n; i++) if (G.p[i].hp > 0) L.push(i);
+  G.p[G.n].tg = L[Math.floor(Math.random() * L.length)];
+}
 
 function newGame() {
   const pv = M.mode === "pvp", n = M.cls.length;
@@ -172,9 +302,10 @@ function newGame() {
 function startFight() {
   const E = ENEMIES[G.stage], D = DIFF[diff], m = Math.round(E.hp * D.hp * (G.n > 1 ? 1.7 : 1));
   G.p.length = G.n;
-  G.p.forEach(f => { f.dp = shuffle([...f.deck]); f.dc = []; f.hand = []; });
+  G.p.forEach(f => { f.dp = shuffle([...f.deck]); f.dc = []; f.hand = []; f.str = 0; f.poison = 0; f.bank = 0; });
   G.p[G.n] = {n: E.n, e: E.e, hp: m, max: m, block: 0, i: 0, hand: [],
     mv: E.mv.map(([t, v]) => [t, t === "a" ? Math.round(v * D.dmg) : v])};
+  aim();
   G.t = 0; G.log = "A wild " + E.n + " appears!";
   G.mode = G.n > 1 ? "pass" : "play";
   if (G.n === 1) beginTurn();
@@ -183,11 +314,15 @@ function startFight() {
 // ---- Playing cards ----
 function play(i) {
   const f = G.p[G.t], id = f.hand[i], c = CARDS[id];
-  if (G.mode !== "play" || c.c > G.energy) return;
+  if (G.mode !== "play" || c.c > G.energy || performance.now() < (G.lockUntil || 0)) return;
   G.energy -= c.c; f.hand.splice(i, 1); f.dc.push(id);
   if (c.b) f.block += c.b;
   if (c.h) f.hp = Math.min(f.max, f.hp + c.h);
   if (c.dr) draw(f, c.dr);
+  if (c.e) G.energy = Math.min(10, G.energy + c.e);
+  if (c.s) f.str = (f.str || 0) + c.s;
+  if (c.p && !c.d) foe().poison = (foe().poison || 0) + c.p;
+  sfx("card");
   G.log = f.n + " played " + c.n + ".";
   if (c.d) atkMini(f, foe(), c); else render();
 }
@@ -197,7 +332,7 @@ const RT = s => s >= 1 ? ["PERFECT!", 1.25] : s >= .7 ? ["Good hit.", 1] : s >= 
 const sc = d => d < .06 ? 1 : d < .16 ? .7 : d < .3 ? .35 : 0;
 function atkMini(f, o, c) {
   G.mode = "mini";
-  const m = G.mini = {k: c.m, f, o, c, p: 0, n: 0, N: 6 + 4 * c.c, hits: 0, r: 0, on: 0,
+  const m = G.mini = {k: c.m, f, o, c, p: 0, n: 0, N: Math.min(16, 6 + 4 * c.c), hits: 0, r: 0, on: 0,
     t0: performance.now(), off: Math.random() * 2, spd: c.c >= 2 ? 1.1 : .8};
   render();
   if (m.k === "mash") m.to = setTimeout(() => fin(RT(Math.min(1, m.n / m.N))), 2000);
@@ -206,8 +341,10 @@ function atkMini(f, o, c) {
 }
 function fin(r) {
   const m = G.mini; if (!m || m.done) return;
-  m.done = 1; clearTimeout(m.to);
-  strike(m.f, m.o, Math.round(m.c.d * (m.c.x || 1) * r[1]), r[0], () => { G.mode = "play"; });
+  m.done = 1; clearTimeout(m.to); G.lockUntil = performance.now() + 800;
+  sfx(r[1] >= 1.25 ? "perfect" : r[1] > 0 ? "ok" : "miss");
+  if (r[1] > 0 && m.c.p) m.o.poison = (m.o.poison || 0) + m.c.p;
+  strike(m.f, m.o, Math.round((m.c.d + (m.f.str || 0)) * (m.c.x || 1) * r[1]), r[0], () => { G.mode = "play"; });
 }
 function loop() {
   const m = G.mini;
@@ -242,7 +379,7 @@ function hitT() {
   const m = G.mini;
   if (!m || m.k !== "target" || m.done || m.lock) return;
   m.lock = 1; clearTimeout(m.to); m.hits++;
-  $("#tg").textContent = "💥";
+  $("#tg").textContent = "💥"; sfx("ok");
   m.to = setTimeout(nextTarget, 300);
 }
 function tap() {
@@ -250,7 +387,7 @@ function tap() {
   if (G.mode !== "mini" || !m || m.done) return;
   if (m.k === "dg") return dodgeTap();
   if (m.k === "time") fin(RT(sc(Math.abs(m.p - .5))));
-  else if (m.k === "mash") { m.n++; const c = $("#cnt"); if (c) c.textContent = m.n; }
+  else if (m.k === "mash") { m.n++; sfx("click"); const c = $("#cnt"); if (c) c.textContent = m.n; }
   else if (m.k === "hold" && !m.on) { m.on = 1; m.t0 = performance.now(); }
 }
 
@@ -265,7 +402,7 @@ function dodge(o, title, cb) {
   const tick = () => {
     if (m.done) return;
     const el = $("#ds");
-    if (c > 0) { if (el) el.textContent = "Dodge starts in " + c; c--; m.t = setTimeout(tick, 1000); return; }
+    if (c > 0) { if (el) el.textContent = "Dodge starts in " + c; sfx("tick"); c--; m.t = setTimeout(tick, 1000); return; }
     m.ph = "wait";
     if (sh) sh.classList.remove("cd");
     if (el) el.textContent = "Wait for the REAL signal. Fakes will try to trick you!";
@@ -287,7 +424,7 @@ function dodge(o, title, cb) {
 }
 function dg(mult, txt) {
   const m = G.mini; if (m.done) return;
-  m.done = 1; clearTimeout(m.t); clearTimeout(m.t2); clearTimeout(m.t3); m.cb(mult, txt);
+  m.done = 1; clearTimeout(m.t); clearTimeout(m.t2); clearTimeout(m.t3); G.lockUntil = performance.now() + 600; m.cb(mult, txt);
 }
 function dodgeTap() {
   const m = G.mini;
@@ -307,7 +444,8 @@ function strike(f, o, base, tag, done) {
 function hit(f, o, dmg, msg, done, zeroTxt) {
   const ab = Math.min(o.block, dmg), tot = dmg;
   o.block -= ab; dmg -= ab; o.hp -= dmg;
-  G.anim = {a: G.p.indexOf(f), h: G.p.indexOf(o)};
+  G.anim = {a: G.p.indexOf(f), h: G.p.indexOf(o), big: dmg >= 10};
+  sfx(dmg >= 10 ? "big" : dmg > 0 ? "hit" : tot === 0 ? "whoosh" : "block");
   G.fx = {i: G.p.indexOf(o), t: tot === 0 ? zeroTxt : dmg > 0 ? "-" + dmg : "Blocked"};
   G.log = msg + (tot ? " " + tot + " damage" : "") + (ab ? " (" + ab + " blocked)." : ".");
   if (o.hp <= 0) {
@@ -319,7 +457,7 @@ function hit(f, o, dmg, msg, done, zeroTxt) {
   if (G.mode !== "end" && G.mode !== "reward") done();
   render();
 }
-function finish(msg) { G.mode = "end"; G.msg = msg; }
+function finish(msg) { G.mode = "end"; G.msg = msg; sfx(/defeated/.test(msg) ? "lose" : "win"); }
 function opts() {
   const f = G.p[G.rw];
   return shuffle(Object.keys(CARDS).filter(k => k !== "defend" && (!CARDS[k].k || CARDS[k].k === f.cls))).slice(0, 3);
@@ -331,20 +469,23 @@ function win() {
     return;
   }
   G.p.slice(0, G.n).forEach(f => { f.hp = f.hp > 0 ? Math.min(f.max, f.hp + 8) : 10; });
-  G.mode = "reward"; G.rw = 0; G.opts = opts();
+  G.mode = "reward"; G.rw = 0; G.opts = opts(); sfx("perfect");
 }
 function endTurn() {
-  if (G.mode !== "play") return;
+  if (G.mode !== "play" || performance.now() < (G.lockUntil || 0)) return;
   const f = G.p[G.t];
-  f.dc.push(...f.hand); f.hand = [];
+  f.dc.push(...f.hand); f.hand = []; f.bank = G.energy;
   if (G.pvp) { G.log = f.n + " ended the turn."; G.t = 1 - G.t; G.mode = "pass"; return render(); }
   const nx = alive(G.t + 1);
   if (nx >= 0) { G.log = f.n + " ended the turn."; G.t = nx; G.mode = "pass"; return render(); }
-  const e = G.p[G.n]; e.block = 0;
+  const e = G.p[G.n];
+  if (poisonTick(e)) return render();
+  e.block = 0;
   const [t, v] = e.mv[e.i % e.mv.length]; e.i++;
-  const next = () => { G.t = alive(0); G.mode = G.n > 1 ? "pass" : "play"; if (G.n === 1) beginTurn(); };
+  const next = () => { aim(); G.t = alive(0); G.mode = G.n > 1 ? "pass" : "play"; if (G.n === 1) beginTurn(); };
   if (t === "a") {
-    const L = G.p.slice(0, G.n).filter(x => x.hp > 0), tg = L[Math.floor(Math.random() * L.length)];
+    if (G.p[e.tg].hp <= 0) aim();
+    const tg = G.p[e.tg];
     strike(e, tg, v, e.n + " attacks" + (G.n > 1 ? " " + tg.n : "") + "!", next);
   } else { e.block += v; G.log = e.n + " gains " + v + " block."; next(); render(); }
 }
@@ -359,17 +500,22 @@ function cardHTML(id, attrs) {
   const c = CARDS[id], k = c.d ? "a" : c.b ? "d" : "u";
   return `<button class="card ${k}" ${attrs}><b>${c.c}</b><span>${c.n}</span><small>${c.t}${c.m ? " · " + MGN[c.m] : ""}</small></button>`;
 }
+function helpHTML() {
+  const keys = dev === "pc" ? "Keys: 1 to 9 play cards, E ends your turn, Space does the mini-games." : "Two players: lay the phone flat with one of you on each side. The screen turns toward whoever is acting.";
+  return `<div class="panel col"><div class="name">How to play</div><div class="tag" style="text-align:left;line-height:1.7">🃏 You get 3 energy each turn, and unspent energy carries over (up to 10). Save up for big cards, or play Recharge to get more.<br>⚔️ Attack cards start a mini-game: timing, charge (hold and release), mash, or aim. A better score means more damage, and a miss does nothing.<br>🛡️ Block soaks damage until your next turn.<br>💨 When you are attacked, wait for the NOW signal, then tap. Ignore the fakes!<br>☠️ Poison hurts every turn. 💪 Strength adds damage to your attacks.<br>🏆 Beat every enemy to win, and pick a new card after each fight.<br>${keys}</div><button class="btn" data-a="help" data-v="0">Got it</button></div>`;
+}
 function menuHTML() {
   const btn = (a, v, t, s) => `<button class="btn alt" data-a="${a}" data-v="${v}">${t}${s ? `<br><span class="tag">${s}</span>` : ""}</button>`;
   if (!dev) return `<div class="panel col"><div class="name">Card Battler</div><div class="tag">Which device are you on?</div>${btn("dev", "phone", "📱 Phone or tablet", "Touch controls")}${btn("dev", "pc", "💻 Computer", "Mouse and keyboard")}</div>`;
+  if (M.help) return helpHTML();
   let h = `<div class="panel col"><div class="name">Card Battler</div>`;
   if (!M.mode) { const two = dev === "pc" ? "2 players, same screen, taking turns" : "2 players, opposite sides of the phone"; h += btn("mode", "pve", "Vs computer", "1 player") + btn("mode", "coop", "Co-op vs computer", two) + btn("mode", "pvp", "Versus", two); }
   else if (M.mode !== "pvp" && !M.d) h += `<div class="tag">Choose a difficulty</div>` + Object.keys(DIFF).map(k => btn("d", k, DIFF[k].n, k === "nightmare" ? "enemy moves hidden" : "")).join("");
   else h += `<div class="tag">${M.mode === "pve" ? "Choose your class" : "Player " + (M.cls.length + 1) + ", choose your class"}</div>` +
     Object.keys(CLASSES).map(k => { const C = CLASSES[k];
-      return btn("cls", k, C.e + " " + C.n, C.d + ". " + Object.values(CARDS).filter(c => c.k === k).map(c => c.n + " (" + MGN[c.m] + ")").join(", ")); }).join("");
-  h += M.mode ? btn("new", "", "Back") : btn("dev", "", "Change device");
-  return h + `<div class="tag">Runs won: ${wins}</div></div>`;
+      return btn("cls", k, C.e + " " + C.n, C.d + ". " + Object.values(CARDS).filter(c => c.k === k && c.m).map(c => c.n + " (" + MGN[c.m] + ")").join(", ")); }).join("");
+  h += M.mode ? btn("new", "", "Back") : btn("help", "1", "How to play") + btn("dev", "", "Change device");
+  return h + `<div class="tag">Runs won: ${wins}</div>${muteBtn()}</div>`;
 }
 function sheetHTML() {
   const m = G.mini, S = (t, s, body, b) => `<div class="sheet" id="sheet"><div class="name" id="dt">${t}</div><div class="tag" id="ds">${s}</div>${body}${b ? `<button class="btn" data-a="tap">${b}</button>` : ""}</div>`;
@@ -404,7 +550,7 @@ function render() {
   let intent = "";
   if (!G.pvp) {
     const e = G.p[G.n], [t, v] = e.mv[e.i % e.mv.length];
-    intent = DIFF[diff].hide ? "Next: ???" : t === "a" ? "Next: attacks for " + v : "Next: gains " + v + " block";
+    intent = DIFF[diff].hide ? "Next: ???" : t === "a" ? "Next: attacks " + (G.n > 1 ? G.p[e.tg].n + " " : "") + "for " + v : "Next: gains " + v + " block";
   }
   const fighter = i => {
     const x = G.p[i];
@@ -413,16 +559,16 @@ function render() {
       <div class="spr ${A.a === i ? "lunge" : ""} ${A.h === i ? "hit" : ""}"><span class="big">${x.hp <= 0 ? "💀" : x.e}</span></div>
       <div class="name">${x.n}</div>
       <div class="bar"><i style="width:${x.hp / x.max * 100}%"></i></div>
-      <div class="tag">${x.hp} / ${x.max} HP${x.block ? " · " + x.block + " block" : ""}</div>
+      <div class="tag">${x.hp} / ${x.max} HP${x.block ? " · " + x.block + " block" : ""}${x.poison ? " · ☠" + x.poison : ""}${x.str ? " · 💪" + x.str : ""}</div>
       ${i === RI && !G.pvp ? `<div class="intent">${intent}</div>` : ""}</div>`;
   };
   const left = G.pvp ? [0] : [...Array(G.n).keys()];
   const label = G.pvp ? f.n + "’s turn" : (G.n > 1 ? f.n + "’s turn · " : "") + DIFF[diff].n + " · Fight " + (G.stage + 1) + " of " + ENEMIES.length;
   let h = `
-  <div class="panel stage">${left.map(fighter).join("")}<div class="vs">VS</div>${fighter(RI)}</div>
+  <div class="panel stage ${A.big ? "quake" : ""}">${left.map(fighter).join("")}<div class="vs">VS</div>${fighter(RI)}</div>
   <div id="log">${G.log}</div>
-  <div class="row"><div class="stats"><span class="bl">Block ${f.block}</span><span class="en">Energy ${G.energy}</span></div><span class="tag">${label}</span></div>
-  <div class="hand">${f.hand.map((id, i) => cardHTML(id, `data-a="play" data-v="${i}" data-k="${i + 1}"` + (CARDS[id].c > G.energy ? " disabled" : ""))).join("")}</div>
+  <div class="row"><div class="stats"><span class="bl">Block ${f.block}</span><span class="en">Energy ${G.energy}</span></div><span class="tag">${label}</span>${muteBtn()}</div>
+  <div class="hand ${G.deal ? "deal" : ""}">${f.hand.map((id, i) => cardHTML(id, `data-a="play" data-v="${i}" data-k="${i + 1}"` + (CARDS[id].c > G.energy ? " disabled" : ""))).join("")}</div>
   <button class="btn" data-a="end">End turn</button>`;
   if (G.mode === "mini") h += sheetHTML();
   if (G.mode === "reward") {
@@ -435,7 +581,7 @@ function render() {
     <div class="tag">Runs won: ${wins}</div><button class="btn" data-a="new">Back to menu</button></div></div>`;
   }
   app.innerHTML = h;
-  G.anim = null; G.fx = null;
+  G.anim = null; G.fx = null; G.deal = 0;
 }
 // mini-games use pointer events so taps react instantly
 $("#app").addEventListener("pointerdown", ev => {
@@ -467,6 +613,8 @@ $("#app").addEventListener("click", ev => {
   else if (a === "end") endTurn();
   else if (a === "pick") pick(v);
   else if (a === "go") { G.mode = "play"; beginTurn(); render(); }
+  else if (a === "mute") { mute = !mute; try { localStorage.setItem("cb_mute", mute ? "1" : "0"); } catch (e) {} document.querySelectorAll('[data-a="mute"]').forEach(x => x.textContent = mute ? "🔇" : "🔊"); if (!mute) sfx("ok"); }
+  else if (a === "help") { M.help = v === "1"; if (!M.help) { try { localStorage.setItem("cb_tut", "1"); } catch (e) {} } render(); }
   else if (a === "dev") { setDev(v); render(); }
   else if (a === "mode") { M = {mode: v, cls: []}; render(); }
   else if (a === "d") { M.d = v; render(); }
